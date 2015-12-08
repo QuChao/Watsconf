@@ -1,0 +1,56 @@
+#! /usr/bin/env zsh
+# -*- mode: sh; coding: utf-8; indent-tabs-mode: nil -*-
+#
+# Copyright(C) Chao QU <dev#quchao.com> All rights reserved.
+
+
+##########
+# Funcs
+##########
+
+## Function: is_brew_program_installed
+function is_brew_program_installed () {
+    if is_program_installed brew && brew list | grep -Fx "$1" &>/dev/null ; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+
+##########
+# Basics
+##########
+
+## Homebrew
+if is_program_installed brew ; then
+    ### PATH
+    path=( {/usr/local,/usr,}{/sbin,/bin}(N-/) $path )
+
+    ### MANPATH
+    manpath=( {/usr,/usr/local}/share/man(N-/) $manpath )
+
+    ### Export vars
+    typeset -gxU path manpath
+
+    ### ZSH completions
+    if is_brew_program_installed zsh-completions ; then
+        ### FPATH
+        fpath=( "$(brew --prefix zsh-completions)/share/zsh-completions"(N-/) $fpath )
+
+        ### Export vars
+        typeset -gxU fpath
+    fi
+
+    ### GNU CoreUtils
+    if is_brew_program_installed coreutils ; then
+        ### PATH
+        path=( "$(brew --prefix coreutils)/libexec/gnubin"(N-/) $path )
+
+        ### MANPATH
+        manpath=( "$(brew --prefix coreutils)/libexec/gnuman"(N-/) manpath )
+
+        ### Export vars
+        typeset -gxU path manpath
+    fi
+fi

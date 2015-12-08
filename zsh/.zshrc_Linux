@@ -1,0 +1,13 @@
+#! /usr/bin/env zsh
+# -*- mode: sh; coding: utf-8; indent-tabs-mode: nil -*-
+#
+# Copyright(C) Chao QU <dev#quchao.com> All rights reserved.
+
+##########
+# Program-specified Configs
+##########
+
+## Java
+if is_program_installed java ; then
+    export JAVA_HOME="$(whence -s java | awk '{print $3}' | sed 's:bin/java::')"
+fi
