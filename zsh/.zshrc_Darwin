@@ -1,0 +1,167 @@
+#! /usr/bin/env zsh
+# -*- mode: sh; coding: utf-8; indent-tabs-mode: nil -*-
+#
+# Copyright(C) Chao QU <dev#quchao.com> All rights reserved.
+
+##########
+# Plugins, pt.3
+##########
+
+## OSX
+plugins=( osx $plugins )
+
+## Homebrew
+if is_program_installed brew ; then
+    plugins=( brew $plugins )
+fi
+
+## Zsh-syntax-highlighting should come last
+if is_brew_program_installed zsh-syntax-highlighting ; then
+    plugins=( $plugins zsh-syntax-highlighting )
+fi
+
+##########
+# Program-specified Configs
+##########
+
+## Emacs
+#if [[ -d "${HOME}/.cask/bin" ]] ; then
+#    path=( "${HOME}/.cask/bin" $path )
+#fi
+
+## TeX
+#if [[ -d "${HOME}/.texmf" ]] ; then
+#    export TEXMFHOME="${HOME}/.texmf"
+#    path=( /usr/tex/bin(N-/) $path )
+#fi
+
+## Java
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.7)"
+
+## Homebrew Cask
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+## Ruby
+#if [[ -d "${HOME}/Library/site_ruby" ]] ; then
+#    export y="${HOME}/Library/site_ruby":"${RUBYLIB}"
+#fi
+#if [[ -d "${HOME}/.rbenv/bin" ]] ; then
+#    path=( "${HOME}/.rbenv/bin" $path )
+#    eval "$(rbenv init -)"
+#fi
+### load/unload local gems
+#function load_local_gems(){
+#    export GEM_HOME="${HOME}/.gem"
+#    path=( "${GEM_HOME}/bin" $path )
+#    typeset -gxU path
+#}
+#function unload_local_gems(){
+#    path=( ${path:#${HOME}/.gem*} )
+#    unset GEM_HOME
+#    typeset -gxU path
+#}
+#load_local_gems
+
+## Perl
+#function load_perl_env(){
+#    local arch; arch="$(perl -MConfig -e 'print $Config{archname}')"
+#    local extlib; extlib="${HOME}/Library/CPAN/lib/perl5"
+#    export PERL5LIB="${extlib}:${extlib}/${arch}"
+#    path=( ${HOME}/Library/CPAN/bin $path )
+#    is_program_installed cpanm && \
+#        export PERL_CPANM_OPT="--local-lib=${HOME}/Library/CPAN"
+#    typeset -gxU path
+#}
+#function unload_perl_env(){
+#    path=( ${path:#${HOME}/Library/CPAN/bin*} )
+#    unset PERL5LIB; unset PERL_CPANM_OPT
+#    typeset -gxU path
+#}
+#load_perl_env
+
+## Python
+### The startup file
+if [[ -f "${HOME}/.pythonstartup" ]] ; then
+    export PYTHONSTARTUP="${HOME}/.pythonstartup"
+fi
+### Pyenv
+if is_program_installed pyenv ; then
+    # Root folder
+    export PYENV_ROOT="${HOME}/.pyenv"
+
+    # Enable shims & autocompletion
+    eval "$(pyenv init - zsh)"
+
+    # Activate virtualenv
+    eval "$(pyenv virtualenv-init - zsh)"
+fi
+
+## PHP
+### PhpBrew
+if is_program_installed phpbrew ; then
+    # Home folder
+    if [[ -d "${HOME}/.phpbrew" ]] ; then
+        export PHPBREW_HOME="${HOME}/.phpbrew"
+    fi
+
+    # prompt current version
+    #export PHPBREW_SET_PROMPT=1
+
+    # init
+    source "${PHPBREW_HOME}/bashrc"
+fi
+
+## Node
+### NVM
+if is_brew_program_installed nvm ; then
+    # Home folder
+    if [[ -d "${HOME}/.nvm" ]] ; then
+        export NVM_DIR="${HOME}/.nvm"
+    fi
+
+    # Distribution mirror url
+    export NVM_NODEJS_ORG_MIRROR="https://npm.taobao.org/dist"
+
+    # Enable symlink for current version
+    export NVM_SYMLINK_CURRENT=true
+
+    # init
+    source "$(brew --prefix nvm)/nvm.sh"
+fi
+
+
+## Ansible
+if is_program_installed ansible ; then
+    # Root folder
+    if [[ -d "${HOME}/.ansible" ]] ; then
+        export ANSIBLE_ROOT="${HOME}/.ansible"
+    fi
+
+    # Config file
+    if [[ -f "${ANSIBLE_ROOT}/ansible.cfg" ]] ; then
+        export ANSIBLE_CONFIG="${ANSIBLE_ROOT}/ansible.cfg"
+    fi
+fi
+
+## Android
+if [[ -d "/Applications/Android-SDK" ]] ; then
+    # Home folder
+    export ANDROID_HOME="/Applications/Android-SDK"
+
+    # Android platform tools
+    path=( "${ANDROID_HOME}"{/platform-tools,/tools}(N-/) $path )
+fi
+
+## Gradle
+if is_program_installed gradle ; then
+    # Home folder
+    export GRADLE_HOME="$(brew --prefix gradle)/libexec"
+
+    if [[ -d "${HOME}/.gradle" ]] ; then
+        # Users' home
+        export GRADLE_USER_HOME="${HOME}/.gradle"
+    fi
+fi
+
+## Export vars
+typeset -gxU path
