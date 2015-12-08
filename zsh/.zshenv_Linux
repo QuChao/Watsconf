@@ -1,0 +1,21 @@
+#! /usr/bin/env zsh
+# -*- mode: sh; coding: utf-8; indent-tabs-mode: nil -*-
+#
+# Copyright(C) Chao QU <dev#quchao.com> All rights reserved.
+
+##########
+# Basic
+##########
+
+## Editor
+if is_program_installed vim ; then
+    alias vi="vim"
+fi
+
+## Debian specific
+#export DEBFULLNAME="Chao QU"
+#export DEBEMAIL="mail#quchao.com"
+#export KPKG_MAINTAINER=${DEBFULLNAME}
+#export KPKG_EMAIL=${DEBEMAIL}
+#export COLUMNS=${COLUMNS:-80}
+
