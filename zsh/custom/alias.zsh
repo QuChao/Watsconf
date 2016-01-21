@@ -54,11 +54,13 @@ alias -s bz2="extract" # tar -xjvf
 
 ## Utilities
 alias please='sudo $(fc -ln -1)'
-alias lookfor="find . -iname"
+alias f="find . -iname"
 alias ducks="du -cksh * | sort -rn|head -11" # Lists with sizes
 alias systail="less -F /var/log/system.log"
 alias logtail="less -F"
 alias hexrand="cat /dev/urandom | hexdump -C | grep 'ca fe'" # show random data in hex
+alias srsync="rsync -rvz -e 'ssh'"
+alias minfo="ffprobe -v quiet -print_format json -show_format -show_streams -i "
 
 ## Darwin Only
 if [[ $OSTYPE == darwin* ]]; then
@@ -80,3 +82,4 @@ if [[ $OSTYPE == darwin* ]]; then
         fi
     fi
 fi
+

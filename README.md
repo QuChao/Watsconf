@@ -16,4 +16,4 @@ sudo echo "\n[[ -d \"\${HOME}/.zsh\" ]] && export ZDOTDIR=\"\${HOME}/.zsh\"\n" >
 
 # Thanks to
 - [uwabami](https://twitter.com/uwabami) & his [*zsh へ移行中*](http://uwabami.junkhub.org/log/)
-- [daxanya1](http://qiita.com/daxanya1) & his [*OS X Mavericks にまっさらな状態から環境設定してみる*]((http://qiita.com/daxanya1/items/d237eb3dc4f5d8cdad9c))
+- [daxanya1](http://qiita.com/daxanya1) & his [*OS X Mavericks にまっさらな状態から環境設定してみる*](http://qiita.com/daxanya1/items/d237eb3dc4f5d8cdad9c)
