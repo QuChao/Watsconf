@@ -34,6 +34,9 @@ zstyle ":completion:*:warnings" format "%BSorry, no matches for: %d%b"
 # Histories
 ##########
 
+## Ignore specific cmds
+export HISTIGNORE='&:ls:[bf]g:exit:pwd:clear:mount:umount:[ \t]*:*#secret';
+
 ## Per-user history file
 HISTFILE="${ZDOTDIR}/.tmp/${USER}-history"
 
