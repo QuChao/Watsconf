@@ -42,25 +42,30 @@ export JAVA_HOME="$(/usr/libexec/java_home -v 1.7)"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 ## Ruby
-#if [[ -d "${HOME}/Library/site_ruby" ]] ; then
-#    export y="${HOME}/Library/site_ruby":"${RUBYLIB}"
-#fi
-#if [[ -d "${HOME}/.rbenv/bin" ]] ; then
-#    path=( "${HOME}/.rbenv/bin" $path )
-#    eval "$(rbenv init -)"
-#fi
-### load/unload local gems
-#function load_local_gems(){
-#    export GEM_HOME="${HOME}/.gem"
-#    path=( "${GEM_HOME}/bin" $path )
-#    typeset -gxU path
-#}
-#function unload_local_gems(){
-#    path=( ${path:#${HOME}/.gem*} )
-#    unset GEM_HOME
-#    typeset -gxU path
-#}
-#load_local_gems
+if is_program_installed rbenv ; then
+    # Home folder
+    if [[ -d "${HOME}/.rbenv" ]] ; then
+        # Root folder
+        #export RBENV_ROOT="${HOME}/.rbenv"
+
+        # Enable shims & autocompletion
+        eval "$(rbenv init - zsh)"
+    fi
+
+    ### load/unload local gems
+    #function load_local_gems(){
+    #    export GEM_HOME="${HOME}/.gem"
+    #    path=( "${GEM_HOME}/bin" $path )
+    #    typeset -gxU path
+    #}
+    #function unload_local_gems(){
+    #    path=( ${path:#${HOME}/.gem*} )
+    #    unset GEM_HOME
+    #    typeset -gxU path
+    #}
+    #load_local_gems
+fi
+
 
 ## Perl
 #function load_perl_env(){
@@ -128,6 +133,17 @@ if is_brew_program_installed nvm ; then
     # init
     source "$(brew --prefix nvm)/nvm.sh"
 fi
+
+
+## Go
+### GVM
+# Home folder
+if [[ -d "${HOME}/.gvm" ]] ; then
+    export GVM_ROOT="${HOME}/.gvm"
+fi
+
+# init
+source "${GVM_ROOT}/scripts/gvm-default"
 
 
 ## Ansible
