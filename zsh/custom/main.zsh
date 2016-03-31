@@ -10,7 +10,7 @@
 
 ## Basics
 umask 022                   # default umask
-bindkey -v                  # vim-like keybind
+#bindkey -v                 # vim-like keybind
 unsetopt beep               # no beep
 
 
