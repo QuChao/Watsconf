@@ -125,7 +125,7 @@ if is_brew_program_installed nvm ; then
     fi
 
     # Distribution mirror url
-    export NVM_NODEJS_ORG_MIRROR="https://npm.taobao.org/dist"
+    export NODEJS_ORG_MIRROR="https://npm.taobao.org/dist"
 
     # Enable symlink for current version
     export NVM_SYMLINK_CURRENT=true
