@@ -1,7 +1,14 @@
 /ansible
+/git
+/goaccess
+/logstash
 /proxy
 /nginx
 /mysql
 /php
-/zsh/.oh-my-zsh
+/tmux
+/zsh/oh-my-zsh
+/zsh/.tmp
 /zsh/custom/plugins/zsh-syntax-highlighting
+/zsh/scripts/*.sh
+/zsh/.zcompdump*

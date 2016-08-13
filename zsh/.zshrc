@@ -5,14 +5,9 @@
 
 ### Oh-my-zsh
 ## Path
-export ZSH="${ZDOTDIR}/.oh-my-zsh"
+export ZSH="${ZDOTDIR}/oh-my-zsh"
 
 ## Settings
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster" # agnoster
 
 # default username
 DEFAULT_USER="Chappell"
@@ -51,6 +46,23 @@ HIST_STAMPS="yyyy-mm-dd"
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM="${ZDOTDIR}/custom"
 
+
+##########
+# Themes
+##########
+
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+ZSH_THEME="agnoster"
+
+# Time Format: 24/12
+#ZSH_TIME="24"
+
+# Theme settings for agnoster
+NOTIFICATION_ENABLED="true"
+
 ##########
 # Plugins, pt.1
 ##########
@@ -73,6 +85,11 @@ plugins=(
 ## Git
 if is_program_installed git ; then
     plugins=( git $plugins )
+fi
+
+## Screen
+if is_program_installed screen ; then
+    plugins=( screen $plugins )
 fi
 
 ## GnuPG agent

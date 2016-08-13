@@ -16,9 +16,14 @@ if is_program_installed brew ; then
 fi
 
 ## Zsh-syntax-highlighting should come last
-if is_brew_program_installed zsh-syntax-highlighting ; then
+if [[ -d "${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting" ]] ; then
+    # path to the highlighters dir
+    export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="${ZDOTDIR}/custom/plugins/zsh-syntax-highlighting/highlighters"
+
+    # add into plugin list
     plugins=( $plugins zsh-syntax-highlighting )
 fi
+
 
 ##########
 # Program-specified Configs
@@ -36,10 +41,15 @@ fi
 #fi
 
 ## Java
-export JAVA_HOME="$(/usr/libexec/java_home -v 1.7)"
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 
 ## Homebrew Cask
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+## Mono
+if is_program_installed mono ; then
+    export MONO_GAC_PREFIX="/usr/local"
+fi
 
 ## Ruby
 if is_program_installed rbenv ; then

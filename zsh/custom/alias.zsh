@@ -54,6 +54,7 @@ alias -s bz2="extract" # tar -xjvf
 
 ## Utilities
 alias please='sudo $(fc -ln -1)'
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias f="find . -iname"
 alias ducks="du -cksh * | sort -rn|head -11" # Lists with sizes
 alias systail="less -F /var/log/system.log"
